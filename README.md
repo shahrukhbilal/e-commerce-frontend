@@ -45,7 +45,7 @@ Includes **Stripe payments**, **Cloudinary image hosting**, **Nodemailer contact
 ## 🚀 Live Links  
 
 - **Frontend (Vercel):** [https://gitrepo-x6rx.vercel.app/](https://gitrepo-x6rx.vercel.app/)  
-- **Backend (Railway):** [https://ecom-backend-production-e2cb.up.railway.app/](https://ecom-backend-production-e2cb.up.railway.app/)
+- **Backend (Railway):** [Pendig](https://ecom-backend-production-e2cb.up.railway.app/)
 
 
 ## 📸 Screenshots / Demo
