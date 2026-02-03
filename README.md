@@ -74,15 +74,17 @@ Includes **Stripe payments**, **Cloudinary image hosting**, **Nodemailer contact
 **Admin Product Upload Page:**  
 ![Admin Product Upload Page](https://res.cloudinary.com/dvjkqt391/image/upload/v1770157560/Product_Upload_Form_fzblcn.png)
 
+# Clone the repo
+git clone https://github.com/shahrukhbilal/leave-menagement-vs2
 
+# Navigate into project folder
+cd E-commerce 
 
+# Install dependencies
+npm install
 
-
-
-
-
-
-
+# Start development server
+npm run
 
 ## 📩 Contact  
 
