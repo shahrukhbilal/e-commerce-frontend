@@ -45,7 +45,43 @@ Includes **Stripe payments**, **Cloudinary image hosting**, **Nodemailer contact
 ## 🚀 Live Links  
 
 - **Frontend (Vercel):** [https://gitrepo-x6rx.vercel.app/](https://gitrepo-x6rx.vercel.app/)  
-- **Backend (Railway):** [https://ecom-backend-production-e2cb.up.railway.app/](https://ecom-backend-production-e2cb.up.railway.app/)  
+- **Backend (Railway):** [https://ecom-backend-production-e2cb.up.railway.app/](https://ecom-backend-production-e2cb.up.railway.app/)
+
+
+## 📸 Screenshots / Demo
+
+**Home Page:**  
+![Home Page](https://res.cloudinary.com/dvjkqt391/image/upload/v1770156250/E-commerce_homepage_tgsyol.png)
+
+**Product Page (with Filters):**  
+![Product Page](https://res.cloudinary.com/dvjkqt391/image/upload/v1770156397/Product_Page_lcuz3t.png)
+
+**Add To Cart Page:**  
+![Add to Cart  Page](https://res.cloudinary.com/dvjkqt391/image/upload/v1770156601/Add_to_cart_Page_grjdy4.png)
+
+**Check Out Page:**  
+![Check Out Page](https://res.cloudinary.com/dvjkqt391/image/upload/v1770156772/Check_Out_Page_xc5vzg.png)
+
+**Complimemnts Page:**  
+![Compliments Page](https://res.cloudinary.com/dvjkqt391/image/upload/v1770157060/Compliments_Page_s3l7ew.png)
+
+**Contact Page:**  
+![Contact Page](https://res.cloudinary.com/dvjkqt391/image/upload/v1770157178/Contact_Us_page_ycdbdv.png)
+
+**Admin Panel Orders Page:**  
+![Admin Panel Orders Page](https://res.cloudinary.com/dvjkqt391/image/upload/v1770157395/Admin_Pannel_baagb9.png)
+
+**Admin Product Upload Page:**  
+![Admin Product Upload Page](https://res.cloudinary.com/dvjkqt391/image/upload/v1770157560/Product_Upload_Form_fzblcn.png)
+
+
+
+
+
+
+
+
+
 
 
 ## 📩 Contact  
