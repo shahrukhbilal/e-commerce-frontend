@@ -5,22 +5,26 @@ import { useNavigate } from 'react-router-dom';
 import { CardElement, useStripe, useElements } from '@stripe/react-stripe-js';
 
 const CheckoutPage = () => {
+  // Stripe hooks for payment
   const stripe = useStripe();
   const elements = useElements();
   const navigate = useNavigate();
 
+  // Get cart items and user info from Redux store
   const cartItems = useSelector((state) => state.cart.items || []);
   const { user } = useSelector((state) => state.auth);
 
+  // Calculate total price of all cart items
   const totalAmount = cartItems.reduce(
     (sum, item) => sum + item.price * item.quantity,
     0
   );
 
+  // Local state for loading indicator and errors
   const [loading, setLoading] = useState(false);
   const [error, setError] = useState(null);
 
-  // ✅ Use same field names as backend expects
+  // Shipping info state (matches backend expected fields)
   const [shippingInfo, setShippingInfo] = useState({
     name: '',
     email: '',
@@ -28,15 +32,21 @@ const CheckoutPage = () => {
     address: '',
   });
 
+  // Payment method state: "stripe" or "cod"
   const [paymentMethod, setPaymentMethod] = useState('stripe');
 
+  // Handle input changes in shipping form
   const handleChange = (e) => {
     setShippingInfo({ ...shippingInfo, [e.target.name]: e.target.value });
   };
 
-  // ✅ COD Order
+  // ------------------------
+  // Cash on Delivery (COD) Order
+  // ------------------------
   const handleCOD = async (e) => {
     e.preventDefault();
+
+    // Validate all fields
     if (!shippingInfo.name || !shippingInfo.email || !shippingInfo.phone || !shippingInfo.address) {
       setError('Please fill in all shipping details.');
       return;
@@ -44,6 +54,8 @@ const CheckoutPage = () => {
 
     try {
       setLoading(true);
+
+      // Send order to backend
       const res = await fetch(`${import.meta.env.VITE_API_URL}/api/orders`, {
         method: 'POST',
         headers: {
@@ -52,7 +64,7 @@ const CheckoutPage = () => {
         },
         body: JSON.stringify({
           cartItems: cartItems.map(item => ({
-            productId: item.productId || item._id, // ✅ ensure productId exists
+            productId: item.productId || item._id, // ensure productId exists
             name: item.name,
             quantity: item.quantity,
             price: item.price
@@ -68,6 +80,7 @@ const CheckoutPage = () => {
         throw new Error('Failed to place order');
       }
 
+      // Navigate to thank you page after successful order
       navigate('/thankyou');
     } catch (err) {
       setError(err.message);
@@ -76,11 +89,16 @@ const CheckoutPage = () => {
     }
   };
 
-  // ✅ Stripe Payment
+  // ------------------------
+  // Stripe Payment Handler
+  // ------------------------
   const handleSubmit = async (e) => {
     e.preventDefault();
     const token = localStorage.getItem('token');
+
     if (!stripe || !elements) return;
+
+    // Validate shipping info
     if (!shippingInfo.name || !shippingInfo.email || !shippingInfo.phone || !shippingInfo.address) {
       setError('Please fill in all shipping details.');
       return;
@@ -90,13 +108,14 @@ const CheckoutPage = () => {
     setError(null);
 
     try {
+      // Create PaymentIntent on backend
       const res = await fetch(`${import.meta.env.VITE_API_URL}/api/payment/create-payment-intent`, {
         method: 'POST',
         headers: {
           'Content-Type': 'application/json',
           Authorization: `Bearer ${user?.token}`,
         },
-        body: JSON.stringify({ amount: totalAmount * 100 }),
+        body: JSON.stringify({ amount: totalAmount * 100 }), // amount in cents/paise
       });
 
       if (!res.ok) {
@@ -106,6 +125,7 @@ const CheckoutPage = () => {
 
       const { clientSecret } = await res.json();
 
+      // Confirm card payment with Stripe
       const result = await stripe.confirmCardPayment(clientSecret, {
         payment_method: {
           card: elements.getElement(CardElement),
@@ -117,9 +137,11 @@ const CheckoutPage = () => {
         },
       });
 
+      // Handle payment result
       if (result.error) {
         setError(result.error.message);
       } else if (result.paymentIntent.status === 'succeeded') {
+        // Save successful order to backend
         await fetch(`${import.meta.env.VITE_API_URL}/api/orders`, {
           method: 'POST',
           headers: {
@@ -156,7 +178,9 @@ const CheckoutPage = () => {
     <div className="checkout" style={{ padding: '2rem', maxWidth: '500px', margin: 'auto' }}>
       <h2 style={{ marginBottom: '1rem' }}>Checkout</h2>
 
+      {/* Form submission changes depending on payment method */}
       <form onSubmit={paymentMethod === 'stripe' ? handleSubmit : handleCOD}>
+        {/* Shipping Info Inputs */}
         <input
           type="text"
           name="name"
@@ -190,7 +214,7 @@ const CheckoutPage = () => {
           style={{ width: '100%', marginBottom: '1rem', padding: '0.5rem' }}
         />
 
-        {/* Payment Method */}
+        {/* Payment Method Selection */}
         <div style={{ marginBottom: '1rem' }}>
           <label>
             <input
@@ -211,14 +235,17 @@ const CheckoutPage = () => {
           </label>
         </div>
 
+        {/* Show Stripe Card Element if Stripe selected */}
         {paymentMethod === 'stripe' && (
           <div style={{ padding: '1rem', border: '1px solid #ccc', borderRadius: '8px' }}>
             <CardElement />
           </div>
         )}
 
+        {/* Display error messages */}
         {error && <p style={{ color: 'red', marginTop: '1rem' }}>{error}</p>}
 
+        {/* Submit button */}
         <button
           type="submit"
           disabled={loading}
