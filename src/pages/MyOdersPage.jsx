@@ -19,6 +19,8 @@ const MyOrdersPage = () => {
         });
 
         const data = await res.json();
+        console.log("API RESPONSE:", data);
+
 
         if (!res.ok) {
           throw new Error(data.message || 'Failed to fetch orders');
@@ -65,7 +67,7 @@ const MyOrdersPage = () => {
               </div>
 
               <ul className="divide-y divide-gray-200 text-gray-700">
-                {order.items.map((item, index) => (
+                {order.cartItems.map((item, index) => (
                   <li key={index} className="py-2 flex justify-between items-center">
                     <span>
                       {item.name} <span className="text-sm text-gray-500">× {item.quantity}</span>
@@ -78,7 +80,7 @@ const MyOrdersPage = () => {
               <div className="mt-4 flex flex-col sm:flex-row sm:justify-between text-sm text-gray-600">
                 <div>
                   Payment: <span className="font-medium capitalize">{order.paymentMethod}</span> |
-                  Status: <span className="italic text-green-600 font-medium">{order.status}</span>
+                  Status: <span className="italic text-green-600 font-medium">{order.paymentStatus}</span>
                 </div>
                 <div className="text-right text-lg font-bold text-green-700">
                   Total: Rs. {order.total.toFixed(2)}

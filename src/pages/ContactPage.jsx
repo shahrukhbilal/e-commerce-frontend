@@ -66,7 +66,7 @@ const ContactPage = () => {
   return (
     <div className="min-h-screen bg-gradient-to-br from-yellow-100 via-white to-yellow-50 text-gray-800">
       {/* Header */}
-      <section className="bg-yellow-400 text-black py-16 px-6 text-center">
+      <section className="bg-red-500 text-black py-16 px-6 text-center">
         <h1 className="text-5xl font-extrabold mb-3 drop-shadow-md">Contact Us</h1>
         <p className="max-w-2xl mx-auto text-lg font-medium">
           We'd love to hear from you — feel free to reach out with any questions or ideas!

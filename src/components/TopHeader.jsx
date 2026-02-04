@@ -3,6 +3,7 @@ import { useSelector, useDispatch } from 'react-redux';
 import { Link, useNavigate } from 'react-router-dom';
 import { ShoppingCart, LogOut } from 'lucide-react';
 import { logout } from '../redux/authSlice';
+import {clearCart} from '../redux/cartSlice'
 
 const TopHeader = () => {
   const cartCount = useSelector((state) => state.cart.items.length);
@@ -12,6 +13,9 @@ const TopHeader = () => {
 
   const handleLogout = () => {
     dispatch(logout());
+    dispatch(clearCart());  
+  localStorage.removeItem("user");
+    
     navigate('/login');
   };
 

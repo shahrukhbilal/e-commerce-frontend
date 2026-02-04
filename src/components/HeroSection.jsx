@@ -14,6 +14,7 @@ const HeroSection = () => {
       try {
         const res = await fetch(`${import.meta.env.VITE_API_URL}/api/heroslides`)
         const data = await res.json();
+        console.log("API DATA 👉", data);
         setSlides(data);
         setLoading(false);
       } catch (error) {
@@ -41,16 +42,16 @@ const HeroSection = () => {
   const { title, description, image, badge } = slides[current];
 
   return (
-    <div className="w-full min-h-[70vh] bg-gradient-to-r from-white via-gray-600 to-white flex flex-col md:flex-row items-center justify-between px-4 sm:px-8 md:px-16 py-8 md:py-14 transition-all duration-700 ease-in-out relative">
+    <div className="w-full min-h-[70vh] bg-red-500 to-blue flex flex-col md:flex-row items-center justify-between px-4 sm:px-8 md:px-16 py-8 md:py-14 transition-all duration-700 ease-in-out relative">
       {/* Left Content */}
       <div className="w-full md:w-1/2 text-center md:text-left mb-8 md:mb-0">
         <span className="inline-block bg-yellow-300 text-black text-xs font-semibold px-3 py-1 rounded-full mb-2 animate-pulse">
           {badge}
         </span>
-        <h1 className="text-3xl sm:text-4xl md:text-5xl font-bold text-gray-800 mb-4 leading-tight">
+        <h1 className="text-3xl sm:text-4xl md:text-5xl font-bold text-black-800 mb-4 leading-tight">
           {title}
         </h1>
-        <p className="text-base sm:text-lg text-gray-600 mb-6 px-2 md:px-0">
+        <p className="text-base sm:text-2xl text-black-600 mb-6 px-2 md:px-0">
           {description}
         </p>
         <div className="flex flex-col sm:flex-row sm:space-x-4 space-y-3 sm:space-y-0 items-center justify-center md:justify-start">

@@ -30,13 +30,13 @@ const FeaturedCategories = () => {
                 alt={cat.name}
                 className="w-full h-32 object-cover rounded mb-2"
               />
-              <h3 className="text-lg font-semibold text-gray-700">{cat.name}</h3>
+              <h3 className="text-lg font-semibold text-balck-700">{cat.name}</h3>
             </a>
           </div>
         ))}
       </div>
     </section>
-    <section className="max-w-9xl bg-gray-400 mx-auto py-20 px-6 grid gap-8 md:grid-cols-3 text-center">
+    <section className="max-w-9xl bg-red-600 mx-auto py-20 px-6 grid gap-8 md:grid-cols-3 text-center">
         <div className="bg-gray-100 p-10 rounded-xl shadow-md hover:shadow-xl transition">
           <h3 className="text-xl font-semibold mb-2">🚚 Fast Delivery</h3>
           <p className="text-gray-600 text-sm">We deliver products quickly across the globe with trusted couriers.</p>

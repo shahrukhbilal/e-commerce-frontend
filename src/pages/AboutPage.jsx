@@ -5,7 +5,7 @@ const AboutPage = () => {
   return (
     <div className="bg-gray-50 text-gray-800">
       
-      <section className="bg-yellow-400 text-black py-16 px-6 text-center">
+      <section className="bg-red-500 text-black py-16 px-6 text-center">
         <h1 className="text-4xl md:text-5xl font-bold mb-4">About Us</h1>
         <p className="max-w-3xl mx-auto text-lg">
           Welcome to <span className="font-semibold">MyShop</span> — where innovation meets style. Discover our journey, values, and mission behind the brand.
@@ -58,7 +58,7 @@ const AboutPage = () => {
       </section>
 
       {/* Footer CTA */}
-      <section className="bg-yellow-400 text-black py-12 text-center">
+      <section className="bg-red-500 text-black py-12 text-center">
         <h2 className="text-2xl font-bold mb-4">Ready to Shop?</h2>
         <a
           href="/"
