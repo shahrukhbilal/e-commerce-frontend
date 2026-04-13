@@ -97,3 +97,11 @@ const FeaturedCategories = () => {
           <h3 className="text-xl font-semibold mb-2">❤️ Customer Support</h3>
           <p className="text-gray-600 text-sm">
             Our friendly team is here to help you 24/7
+            </p>
+        </div>
+      </section>
+    </>
+  );
+};
+
+export default FeaturedCategories;

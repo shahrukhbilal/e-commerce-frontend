@@ -1,43 +1,26 @@
 import React, { useState, useEffect } from 'react';
-import { Menu, X } from 'lucide-react';
-import brandLogo from '../assets/Brand.png'; // Brand logo image
+import { Menu, X, ShoppingCart, User } from 'lucide-react';
+import brandLogo from '../assets/Brand.png';
 
-/**
- * MainNavbar Component
- * -------------------
- * - Displays top navigation bar
- * - Fetches product categories dynamically from backend
- * - Supports responsive layout with mobile hamburger menu
- */
 const MainNavbar = () => {
-  // Controls mobile menu open / close state
   const [isOpen, setIsOpen] = useState(false);
-
-  // Stores categories fetched from backend
   const [categories, setCategories] = useState([]);
 
-  // Toggles mobile menu visibility
+  const [search, setSearch] = useState('');
+  const [searchResults, setSearchResults] = useState([]);
+
   const toggleMenu = () => setIsOpen(!isOpen);
 
-  /**
-   * Fetch categories once on component mount
-   * Used to build both desktop and mobile navigation links
-   */
+  // Fetch categories
   useEffect(() => {
     const fetchCategories = async () => {
       try {
-        // Request categories from API
         const res = await fetch(
           `${import.meta.env.VITE_API_URL}/api/categories`
         );
-
-        // Parse response
         const data = await res.json();
-
-        // Save categories in state
         setCategories(data);
       } catch (error) {
-        // Fail silently for UI, log error for debugging
         console.error('Error fetching categories:', error);
       }
     };
@@ -45,61 +28,163 @@ const MainNavbar = () => {
     fetchCategories();
   }, []);
 
+  // Search handler
+  const handleSearch = async (e) => {
+    e.preventDefault();
+
+    if (!search.trim()) return;
+
+    try {
+      const res = await fetch(
+        `${import.meta.env.VITE_API_URL}/api/products/search?q=${search}`
+      );
+
+      const data = await res.json();
+      setSearchResults(data);
+    } catch (error) {
+      console.error('Search error:', error);
+    }
+  };
+
   return (
-    <nav className="bg-white shadow-md px-4 py-3">
-      
-      {/* ================= Navbar Container ================= */}
-      <div className="flex justify-between items-center max-w-6xl mx-auto">
-        
-        {/* ================= Brand Logo ================= */}
-        <a href="/" className="flex items-center space-x-4">
+    <nav className="bg-white/80 backdrop-blur-md shadow-md sticky top-0 z-50">
+
+      <div className="flex justify-between items-center max-w-7xl mx-auto px-4 py-3">
+
+        {/* Logo */}
+        <a href="/" className="flex items-center">
           <img
             src={brandLogo}
             alt="Brand Logo"
-            className="h-30 w-auto object-contain"
+            className="h-12 w-auto object-contain"
           />
         </a>
 
-        {/* ================= Mobile Hamburger Icon ================= */}
-        <div className="md:hidden">
+        {/* ================= SEARCH ================= */}
+        <div className="hidden md:flex w-1/3 relative">
+
+          <form onSubmit={handleSearch} className="flex w-full">
+            <input
+              type="text"
+              value={search}
+              onChange={(e) => setSearch(e.target.value)}
+              placeholder="Search products..."
+              className="w-full px-4 py-2 border rounded-l-full focus:outline-none focus:ring-2 focus:ring-blue-400"
+            />
+
+            <button
+              type="submit"
+              className="bg-blue-600 text-white px-4 rounded-r-full hover:bg-blue-700 transition"
+            >
+              Search
+            </button>
+          </form>
+
+          {/* SEARCH DROPDOWN */}
+          {search && searchResults.length > 0 && (
+            <div className="absolute top-full mt-2 left-0 w-full bg-white shadow-2xl rounded-xl z-50 max-h-96 overflow-y-auto border">
+
+              {searchResults.map((item) => (
+                <a
+                  key={item._id}
+                  href={`/product/${item._id}`}
+                  className="flex items-center gap-3 p-3 hover:bg-gray-100 transition"
+                >
+                  <img
+                    src={`${import.meta.env.VITE_API_URL}${item.images[0]}`}
+                    alt={item.title}
+                    className="w-12 h-12 object-cover rounded-md"
+                  />
+
+                  <div className="flex flex-col">
+                    <p className="font-medium text-gray-800">
+                      {item.title}
+                    </p>
+                    <p className="text-sm text-gray-500">
+                      ${item.price}
+                    </p>
+                  </div>
+
+                </a>
+              ))}
+
+            </div>
+          )}
+
+          {/* NO RESULTS */}
+          {search && searchResults.length === 0 && (
+            <div className="absolute top-full mt-2 left-0 w-full bg-white shadow-md rounded-xl p-3 text-center text-gray-500">
+              No products found 😕
+            </div>
+          )}
+
+        </div>
+
+        {/* Desktop Categories */}
+        <ul className="hidden md:flex space-x-6 text-base font-medium text-gray-700">
+          {categories.map((cat) => (
+            <li key={cat._id}>
+              <a
+                href={`/category/${cat.slug}`}
+                className="hover:text-blue-600 transition"
+              >
+                {cat.name}
+              </a>
+            </li>
+          ))}
+        </ul>
+
+        {/* Right Side */}
+        <div className="flex items-center gap-4">
+
+          {/* Cart */}
+          <div className="relative cursor-pointer">
+            <ShoppingCart size={22} />
+            <span className="absolute -top-2 -right-2 bg-red-500 text-white text-xs px-1 rounded-full">
+              2
+            </span>
+          </div>
+
+          {/* Profile */}
+          <div className="cursor-pointer hidden md:block">
+            <User size={22} />
+          </div>
+
+          {/* Mobile Menu */}
           <button
             onClick={toggleMenu}
-            className="text-gray-700 focus:outline-none"
+            className="md:hidden text-gray-700"
           >
             {isOpen ? <X size={28} /> : <Menu size={28} />}
           </button>
+
         </div>
 
-        {/* ================= Desktop Menu ================= */}
-        <ul className="hidden md:flex space-x-6 text-lg font-semibold text-gray-700">
-          {categories.map((cat) => (
-            <li key={cat._id}>
-              <a
-                href={`/category/${cat.slug}`}
-                className="hover:text-blue-600"
-              >
-                {cat.name}
-              </a>
-            </li>
-          ))}
-        </ul>
       </div>
 
-      {/* ================= Mobile Dropdown Menu ================= */}
+      {/* ================= MOBILE MENU ================= */}
       {isOpen && (
-        <ul className="md:hidden mt-3 space-y-2 text-center text-base font-semibold text-gray-700">
+        <div className="md:hidden px-4 pb-4 space-y-3">
+
+          <input
+            type="text"
+            placeholder="Search..."
+            className="w-full px-4 py-2 border rounded-lg"
+          />
+
           {categories.map((cat) => (
-            <li key={cat._id}>
-              <a
-                href={`/category/${cat.slug}`}
-                className="block hover:text-blue-600"
-              >
-                {cat.name}
-              </a>
-            </li>
+            <a
+              key={cat._id}
+              href={`/category/${cat.slug}`}
+              className="block text-center text-gray-700 hover:text-blue-600"
+            >
+              {cat.name}
+            </a>
           ))}
-        </ul>
+
+        </div>
       )}
+
     </nav>
   );
 };
