@@ -19,7 +19,7 @@ const CartPage = () => {
   );
 
   return (
-    <section className="py-10 px-4 sm:px-8 md:px-16 max-w-5xl mx-auto">
+    <section className="py-10 px-5 sm:px-10 md:px-16 max-w-5xl mx-auto">
       {/* Page Title */}
       <h2 className="text-3xl font-bold text-gray-800 mb-6 text-center">
         Your Cart
