@@ -6,22 +6,31 @@ import { Mail, User, MessageSquare, BookOpen } from 'lucide-react';
 
 const ContactPage = () => {
   const navigate = useNavigate();
+
+  // State for storing form input values
   const [formData, setFormData] = useState({
     name: '',
     email: '',
     subject: '',
     message: '',
   });
+
+  // Loading state to show spinner during submission
   const [loading, setLoading] = useState(false);
 
+  // ------------------------
+  // Form Validation Function
+  // ------------------------
   const validateForm = () => {
     const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
 
+    // Check required fields
     if (!formData.name.trim() || !formData.email.trim() || !formData.message.trim()) {
       toast.error('All fields are required!');
       return false;
     }
 
+    // Check email format
     if (!emailRegex.test(formData.email)) {
       toast.error('Invalid email format!');
       return false;
@@ -30,16 +39,26 @@ const ContactPage = () => {
     return true;
   };
 
+  // ------------------------
+  // Handle Input Changes
+  // ------------------------
   const handleChange = (e) => {
     setFormData((prev) => ({ ...prev, [e.target.name]: e.target.value }));
   };
 
+  // ------------------------
+  // Handle Form Submission
+  // ------------------------
   const handleSubmit = async (e) => {
     e.preventDefault();
+
+    // Validate form before sending
     if (!validateForm()) return;
 
     try {
       setLoading(true);
+
+      // Send form data to backend
       const res = await fetch(`${import.meta.env.VITE_API_URL}/api/contact`, {
         method: 'POST',
         headers: { 'Content-Type': 'application/json' },
@@ -49,8 +68,13 @@ const ContactPage = () => {
       const data = await res.json();
 
       if (res.ok) {
+        // Success notification
         toast.success('Message sent successfully!');
+
+        // Reset form
         setFormData({ name: '', email: '', subject: '', message: '' });
+
+        // Navigate to feedback page after a short delay
         setTimeout(() => navigate('/feedback'), 1000);
       } else {
         toast.error(data.message || 'Something went wrong.');
@@ -65,7 +89,10 @@ const ContactPage = () => {
 
   return (
     <div className="min-h-screen bg-gradient-to-br from-yellow-100 via-white to-yellow-50 text-gray-800">
-      {/* Header */}
+      
+      {/* ------------------------
+          Header Section
+      ------------------------ */}
       <section className="bg-yellow-400 text-black py-16 px-6 text-center">
         <h1 className="text-5xl font-extrabold mb-3 drop-shadow-md">Contact Us</h1>
         <p className="max-w-2xl mx-auto text-lg font-medium">
@@ -73,9 +100,12 @@ const ContactPage = () => {
         </p>
       </section>
 
-      {/* Contact Info + Form */}
+      {/* ------------------------
+          Contact Info + Form Section
+      ------------------------ */}
       <section className="max-w-7xl mx-auto px-6 py-16 grid grid-cols-1 md:grid-cols-2 gap-12">
-        {/* Contact Info */}
+        
+        {/* Contact Information */}
         <div className="space-y-6 text-gray-700">
           <h2 className="text-2xl font-semibold">📞 Contact Information</h2>
           <p className="text-gray-600">Reach out directly or send us a message through the form.</p>
@@ -101,6 +131,8 @@ const ContactPage = () => {
           <h2 className="text-2xl font-semibold mb-6">📬 Send Us a Message</h2>
 
           <form onSubmit={handleSubmit} className="space-y-5">
+            
+            {/* Name Input */}
             <div>
               <label className="block text-sm font-medium mb-1">Name</label>
               <div className="relative">
@@ -117,6 +149,7 @@ const ContactPage = () => {
               </div>
             </div>
 
+            {/* Email Input */}
             <div>
               <label className="block text-sm font-medium mb-1">Email</label>
               <div className="relative">
@@ -133,6 +166,7 @@ const ContactPage = () => {
               </div>
             </div>
 
+            {/* Subject Input */}
             <div>
               <label className="block text-sm font-medium mb-1">Subject</label>
               <div className="relative">
@@ -148,6 +182,7 @@ const ContactPage = () => {
               </div>
             </div>
 
+            {/* Message Input */}
             <div>
               <label className="block text-sm font-medium mb-1">Message</label>
               <div className="relative">
@@ -164,6 +199,7 @@ const ContactPage = () => {
               </div>
             </div>
 
+            {/* Submit Button */}
             <button
               type="submit"
               disabled={loading}
@@ -171,6 +207,7 @@ const ContactPage = () => {
                 loading ? 'opacity-50 cursor-not-allowed' : ''
               }`}
             >
+              {/* Show loading spinner if submitting */}
               {loading && (
                 <svg
                   className="animate-spin h-5 w-5 mr-2 text-black"
@@ -199,7 +236,9 @@ const ContactPage = () => {
         </div>
       </section>
 
-      {/* Google Map */}
+      {/* ------------------------
+          Google Map Section
+      ------------------------ */}
       <section className="mt-10 px-6">
         <iframe
           title="Google Map"
@@ -210,7 +249,7 @@ const ContactPage = () => {
         ></iframe>
       </section>
 
-      {/* Toast Notification */}
+      {/* Toast notifications container */}
       <ToastContainer position="top-center" autoClose={3000} />
     </div>
   );

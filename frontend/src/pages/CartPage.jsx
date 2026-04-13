@@ -1,6 +1,6 @@
 import React from 'react';
 import { useSelector, useDispatch } from 'react-redux';
-import { Link } from 'react-router-dom';  // ✅ Correct import
+import { Link } from 'react-router-dom';  // ✅ Link used for navigation
 import {
   removeFromCart,
   increaseQuantity,
@@ -8,9 +8,11 @@ import {
 } from '../redux/cartSlice';
 
 const CartPage = () => {
+  // Get cart items from Redux store
   const cartItems = useSelector((state) => state.cart.items);
   const dispatch = useDispatch();
 
+  // Calculate total price for all items in the cart
   const total = cartItems.reduce(
     (sum, item) => sum + item.price * item.quantity,
     0
@@ -18,19 +20,23 @@ const CartPage = () => {
 
   return (
     <section className="py-10 px-4 sm:px-8 md:px-16 max-w-5xl mx-auto">
+      {/* Page Title */}
       <h2 className="text-3xl font-bold text-gray-800 mb-6 text-center">
         Your Cart
       </h2>
 
+      {/* Check if cart is empty */}
       {cartItems.length === 0 ? (
         <p className="text-center text-gray-500">Your cart is empty.</p>
       ) : (
         <div className="space-y-6">
+          {/* Map over cart items and display each one */}
           {cartItems.map((item) => (
             <div
-              key={item._id}
+              key={item._id} // Unique key for each item
               className="flex items-center justify-between bg-white p-4 rounded-lg shadow"
             >
+              {/* Item image and name */}
               <div className="flex items-center gap-4">
                 <img
                   src={item.image}
@@ -47,6 +53,7 @@ const CartPage = () => {
                 </div>
               </div>
 
+              {/* Quantity controls */}
               <div className="flex items-center gap-2">
                 <button
                   onClick={() => dispatch(decreaseQuantity(item._id))}
@@ -63,6 +70,7 @@ const CartPage = () => {
                 </button>
               </div>
 
+              {/* Remove item button */}
               <button
                 onClick={() => dispatch(removeFromCart(item._id))}
                 className="text-red-600 font-semibold hover:underline"
@@ -72,10 +80,12 @@ const CartPage = () => {
             </div>
           ))}
 
+          {/* Total price display */}
           <div className="text-right text-xl font-bold text-gray-800 mt-6">
             Total: ${total.toFixed(2)}
           </div>
 
+          {/* Proceed to Checkout button */}
           <div className="text-center mt-8">
             <Link
               to="/checkout"
