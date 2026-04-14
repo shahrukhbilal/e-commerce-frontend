@@ -49,18 +49,18 @@ const MainNavbar = () => {
   };
 
   return (
-    <nav className="bg-white/80 backdrop-blur-md shadow-md sticky top-0 z-50">
+    <nav className="bg-white/ backdrop-blur-md shadow-md sticky top-10 z-50">
 
       <div className="flex justify-between items-center max-w-7xl mx-auto px-4 py-3">
 
         {/* Logo */}
-        <a href="/" className="flex items-center">
+        <Link to="/shop" className="flex items-center">
           <img
             src={brandLogo}
             alt="Brand Logo"
             className="h-12 w-auto object-contain"
           />
-        </a>
+        </Link>
 
         {/* ================= SEARCH ================= */}
         <div className="hidden md:flex w-1/3 relative">

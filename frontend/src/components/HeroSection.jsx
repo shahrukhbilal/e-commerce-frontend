@@ -72,7 +72,7 @@ const HeroSection = () => {
   const { title, description, image, badge } = slides[current];
 
   return (
-    <div className="w-full min-h-[70vh] bg-gradient-to-r from-white via-gray-600 to-white flex flex-col md:flex-row items-center justify-between px-4 sm:px-8 md:px-16 py-8 md:py-14 transition-all duration-700 ease-in-out relative">
+    <div className="w-full min-h-[70vh] bg-gradient-to-r from-white via-gray-600 to-white flex flex-col md:flex-row items-center top-10 justify-between px-4 sm:px-8 md:px-16 py-8 md:py-14 transition-all duration-700 ease-in-out relative">
       
       {/* ================= Left Content ================= */}
       <div className="w-full md:w-1/2 text-center md:text-left mb-8 md:mb-0">

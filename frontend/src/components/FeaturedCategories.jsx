@@ -40,7 +40,7 @@ const FeaturedCategories = () => {
     <>
       {/* ================= Featured Categories Section ================= */}
       <section className="py-10 px-4 sm:px-8 md:px-16">
-        <h2 className="text-2xl font-bold text-gray-800 mb-6 text-center">
+        <h2 className="text-2xl font-bold text-gray-800 mb-6 mt-10 text-center">
           Featured Categories
         </h2>
 
