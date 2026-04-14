@@ -41,6 +41,7 @@ const MainNavbar = () => {
 
       const data = await res.json();
       setSearchResults(data);
+      console.log(searchResults)
     } catch (error) {
       console.error('Search error:', error);
     }
@@ -82,34 +83,48 @@ const MainNavbar = () => {
 
           {/* SEARCH DROPDOWN */}
           {search && searchResults.length > 0 && (
-            <div className="absolute top-full mt-2 left-0 w-full bg-white shadow-2xl rounded-xl z-50 max-h-96 overflow-y-auto border">
+  <div className="absolute top-full mt-2 left-0 w-full bg-white shadow-2xl rounded-xl z-50 max-h-96 overflow-y-auto border">
 
-              {searchResults.map((item) => (
-                <a
-                  key={item._id}
-                  href={`/product/${item._id}`}
-                  className="flex items-center gap-3 p-3 hover:bg-gray-100 transition"
-                >
-                  <img
-                    src={`${import.meta.env.VITE_API_URL}${item.images[0]}`}
-                    alt={item.title}
-                    className="w-12 h-12 object-cover rounded-md"
-                  />
+    {/* Header (Table style) */}
+    <div className="grid grid-cols-4 gap-2 px-4 py-2 bg-gray-100 text-sm font-semibold text-gray-600 sticky top-0">
+      <span>ID</span>
+      <span>Image</span>
+      <span>Title</span>
+      <span>Price</span>
+    </div>
 
-                  <div className="flex flex-col">
-                    <p className="font-medium text-gray-800">
-                      {item.title}
-                    </p>
-                    <p className="text-sm text-gray-500">
-                      ${item.price}
-                    </p>
-                  </div>
+    {searchResults.map((item) => (
+      <a
+        key={item._id}
+        href={`/product/${item._id}`}
+        className="grid grid-cols-4 gap-2 items-center px-4 py-3 hover:bg-gray-50 transition border-t"
+      >
+        {/* ID */}
+        <span className="text-xs text-gray-500 truncate">
+          {item._id.slice(-6)}
+        </span>
 
-                </a>
-              ))}
+        {/* Image */}
+        <img
+          src={item.images[0]}
+          alt={item.title}
+          className="w-12 h-12 object-cover rounded-md"
+        />
 
-            </div>
-          )}
+        {/* Title */}
+        <span className="text-sm font-medium text-gray-800 truncate">
+          {item.title}
+        </span>
+
+        {/* Price */}
+        <span className="text-sm font-semibold text-green-600">
+          ${item.price}
+        </span>
+      </a>
+    ))}
+
+  </div>
+)}
 
           {/* NO RESULTS */}
           {search && searchResults.length === 0 && (
