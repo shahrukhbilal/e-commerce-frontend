@@ -1,6 +1,7 @@
 import React, { useState, useEffect } from 'react';
 import { Menu, X, ShoppingCart, User } from 'lucide-react';
 import brandLogo from '../assets/Brand.png';
+import { Link } from 'react-router-dom';
 
 const MainNavbar = () => {
   const [isOpen, setIsOpen] = useState(false);
@@ -94,9 +95,9 @@ const MainNavbar = () => {
     </div>
 
     {searchResults.map((item) => (
-      <a
+      <Link
         key={item._id}
-        href={`/product/${item._id}`}
+        to={`/product/${item.slug}`}
         className="grid grid-cols-4 gap-2 items-center px-4 py-3 hover:bg-gray-50 transition border-t"
       >
         {/* ID */}
@@ -120,7 +121,7 @@ const MainNavbar = () => {
         <span className="text-sm font-semibold text-green-600">
           ${item.price}
         </span>
-      </a>
+      </Link>
     ))}
 
   </div>
