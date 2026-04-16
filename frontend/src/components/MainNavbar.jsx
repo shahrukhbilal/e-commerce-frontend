@@ -20,6 +20,7 @@ const MainNavbar = () => {
           `${import.meta.env.VITE_API_URL}/api/categories`
         );
         const data = await res.json();
+        console.log('caregories data', data)
         setCategories(data);
       } catch (error) {
         console.error('Error fetching categories:', error);
@@ -138,17 +139,18 @@ const MainNavbar = () => {
 
         {/* Desktop Categories */}
         <ul className="hidden md:flex space-x-6 text-base font-medium text-gray-700">
-          {categories.map((cat) => (
-            <li key={cat._id}>
-              <a
-                href={`/category/${cat.slug}`}
-                className="hover:text-blue-600 transition"
-              >
-                {cat.name}
-              </a>
-            </li>
-          ))}
-        </ul>
+  {categories?.length > 0 && categories.map((cat) => (
+    <li key={cat._id}>
+      <Link
+  to={`/category/${cat.slug}`}
+  onClick={() => console.log(cat)}
+  className="hover:text-blue-600 transition"
+>
+  {cat.name}
+</Link>
+    </li>
+  ))}
+</ul>
 
         {/* Right Side */}
         <div className="flex items-center gap-4">

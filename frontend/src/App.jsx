@@ -1,5 +1,5 @@
 import React from 'react';
-import { BrowserRouter as Router, Routes, Route } from 'react-router-dom';
+import { BrowserRouter as Router, Routes, Route, BrowserRouter } from 'react-router-dom';
 import MainLayout from './MainLayout';
 import SimpleLayout from './SimpleLayout';
 import ProductDetailPage from './pages/ProductDetailPage';
@@ -27,20 +27,24 @@ import AdminMessages from './pages/AdminMessages';
 import Products  from './pages/admin/Products';
 import StripeContainer from './StripeContainer';
 import AdminProductForm from './components/AdminProductForm';
+import FeaturedCategories from './components/FeaturedCategories';
+import CategoryPage from './pages/CategoryPage';
 
 
 function App() {
   return (
-    <Router>
-      <ErrorBoundary>
+    <BrowserRouter>
+    <ErrorBoundary>
       <Routes>
-
+  
         {/* 🏠 Public Website Routes */}
         <Route path="/" element={<MainLayout />} />
+  
         <Route element={<SimpleLayout />}>
           <Route path="/product/:slug" element={<ProductDetailPage />} />
+          <Route path="/category/:slug" element={<CategoryPage />} />
           <Route path="/cart" element={<CartPage />} />
-          <Route path="/checkout" element={<StripeContainer/>} />
+          <Route path="/checkout" element={<StripeContainer />} />
           <Route path="/thankyou" element={<ThankYouPage />} />
           <Route path="/my-orders" element={<MyOrdersPage />} />
           <Route path="/login" element={<AuthForm />} />
@@ -48,31 +52,26 @@ function App() {
           <Route path="/about" element={<AboutPage />} />
           <Route path="/contact" element={<ContactPage />} />
           <Route path="/feedback" element={<FeedbackPage />} />
-
-          {/* <Route path="/admin/login" element={<AdminLogin />} /> */}
         </Route>
-
+  
         {/* 🛠️ Admin Panel Routes */}
-       <Route path="/admin" element={<AdminLayout />}>
-  <Route index element={<AdminDashboard />} />
-  <Route path="products" element={<Products />} />
-  <Route path="orders" element={<AdminOrders />} />
-  <Route path="users" element={<AdminUsers />} />
-  <Route path="stats" element={<AdminDashboard />} />
-<Route path="contacts" element={<AdminMessages />} />
-<Route path='add-product' element={<AdminProductForm/>}></Route>
-<Route path='back' element={<MainLayout></MainLayout>}> </Route>
-</Route>
-
-<Route path="/admin/orders/ship/:id" element={<AdminShipOrder />} />
-
-
+        <Route path="/admin" element={<AdminLayout />}>
+          <Route index element={<AdminDashboard />} />
+          <Route path="products" element={<Products />} />
+          <Route path="orders" element={<AdminOrders />} />
+          <Route path="users" element={<AdminUsers />} />
+          <Route path="stats" element={<AdminDashboard />} />
+          <Route path="contacts" element={<AdminMessages />} />
+          <Route path="add-product" element={<AdminProductForm />} />
+        </Route>
+  
+        <Route path="/admin/orders/ship/:id" element={<AdminShipOrder />} />
+  
       </Routes>
-
-      {/* ✅ Toast Notification Container */}
+  
       <ToastContainer position="top-right" autoClose={3000} />
-      </ErrorBoundary>
-    </Router>
+    </ErrorBoundary>
+  </BrowserRouter>
   );
 }
 
