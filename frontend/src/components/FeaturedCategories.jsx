@@ -71,7 +71,7 @@ const FeaturedCategories = () => {
       </section>
 
       {/* ================= Service Highlights Section ================= */}
-      <section className="max-w-9xl bg-gray-400 mx-auto py-20 px-6 grid gap-8 md:grid-cols-3 text-center">
+      <section className="max-w-9xl bg-green-700 mx-auto py-20 px-6 grid gap-8 md:grid-cols-3 text-center">
         
         {/* Fast Delivery */}
         <div className="bg-gray-100 p-10 rounded-xl shadow-md hover:shadow-xl transition">

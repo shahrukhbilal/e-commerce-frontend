@@ -74,7 +74,7 @@ const MainNavbar = () => {
               placeholder="Search products..."
               className="w-full px-4 py-2 border rounded-l-full focus:outline-none focus:ring-2 focus:ring-yellow-400"
             />
-            <button className="bg-yellow-500 text-white px-4 rounded-r-full">
+            <button className="bg-green-600 text-white font-bold px-4 rounded-r-full">
               Search
             </button>
           </form>
@@ -116,7 +116,7 @@ const MainNavbar = () => {
             <li key={cat._id}>
               <Link
                 to={`/category/${cat.slug}`}
-                className="hover:text-yellow-600"
+                className="hover:text-green-600 font-bold "
               >
                 {cat.name}
               </Link>
@@ -185,7 +185,7 @@ const MainNavbar = () => {
               key={cat._id}
               to={`/category/${cat.slug}`}
               onClick={() => setIsOpen(false)}
-              className="block text-center text-gray-700 py-2 border-b"
+              className="block text-center text-gray-700 py-1 border-b hover:bg-yellow-600"
             >
               {cat.name}
             </Link>

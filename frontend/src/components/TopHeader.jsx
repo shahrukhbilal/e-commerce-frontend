@@ -17,7 +17,7 @@ const TopHeader = () => {
   };
 
   return (
-<div className="fixed top-0 left-0 w-full z-50 bg-gray-900 text-gray-200 text-xs sm:text-sm px-3 sm:px-4 py-2 sm:py-3 shadow-md truncate">
+<div className="fixed top-0 left-0 w-full z-50 bg-green-700 text-gray-200 text-xs sm:text-sm px-3 sm:px-4 py-2 sm:py-3 shadow-md truncate">
 <div className="max-w-7xl mx-auto flex justify-between items-center">
 
   {/* Left - Contact */}

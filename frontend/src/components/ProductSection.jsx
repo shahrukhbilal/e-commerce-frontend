@@ -1,4 +1,5 @@
 import React, { useEffect, useState } from "react";
+import { Link } from "react-router-dom";
 
 /**
  * ProductSection Component
@@ -71,7 +72,7 @@ const ProductSection = () => {
       </div>
 
       {/* ================= Filter Bar ================= */}
-      <div className="bg-white shadow-sm rounded-lg p-4 mb-10 flex flex-wrap gap-4 items-center justify-between">
+      <div className="bg-green-800 shadow-sm rounded-lg p-4 mb-10 flex flex-wrap gap-4 items-center justify-between">
         
         {/* Category Dropdown */}
         <select
@@ -79,7 +80,7 @@ const ProductSection = () => {
           onChange={(e) =>
             setFilters({ ...filters, category: e.target.value })
           }
-          className="border border-gray-300 px-4 py-2 rounded-md focus:ring-2 focus:ring-yellow-400"
+          className="border bg-white border-gray-300 px-4 py-2 rounded-md focus:ring-2 focus:ring-white"
         >
           <option value="">All Categories</option>
           <option value="men">Men</option>
@@ -96,7 +97,7 @@ const ProductSection = () => {
           onChange={(e) =>
             setFilters({ ...filters, min: e.target.value })
           }
-          className="border border-gray-300 px-4 py-2 rounded-md w-32 focus:ring-2 focus:ring-yellow-400"
+          className="border bg-white border-gray-300 px-4 py-2 rounded-md w-32 focus:ring-2 focus:ring-white"
         />
 
         {/* Max Price */}
@@ -107,7 +108,7 @@ const ProductSection = () => {
           onChange={(e) =>
             setFilters({ ...filters, max: e.target.value })
           }
-          className="border border-gray-300 px-4 py-2 rounded-md w-32 focus:ring-2 focus:ring-yellow-400"
+          className="border bg-white border-gray-300 px-4 py-2 rounded-md w-32 focus:ring-2 focus:ring-white"
         />
 
         {/* Sorting Dropdown */}
@@ -116,7 +117,7 @@ const ProductSection = () => {
           onChange={(e) =>
             setFilters({ ...filters, sort: e.target.value })
           }
-          className="border border-gray-300 px-4 py-2 rounded-md focus:ring-2 focus:ring-yellow-400"
+          className="border bg-white border-gray-300 px-4 py-2 rounded-md focus:ring-2 focus:ring-yellow-white"
         >
           <option value="">Sort by</option>
           <option value="low">Price: Low to High</option>
@@ -126,7 +127,7 @@ const ProductSection = () => {
         {/* Apply Filters Button */}
         <button
           onClick={fetchProducts}
-          className="bg-yellow-400 hover:bg-yellow-500 text-black font-semibold px-6 py-2 rounded-md shadow-sm transition"
+          className="bg-white hover:bg-green-700 hover:scale-110 text-black font-semibold px-6 py-2 rounded-md shadow-sm transition"
         >
           Apply Filters
         </button>
@@ -159,12 +160,12 @@ const ProductSection = () => {
             </p>
 
             {/* View Details Button */}
-            <a
+            <Link
               href={`/product/${product.slug}`}
-              className="inline-block bg-yellow-400 hover:bg-yellow-500 text-black font-semibold py-2 px-4 rounded-full text-sm transition"
+              className="inline-block bg-green-600 hover:bg-green-700 hover:scale-110 text-white font-semibold py-2 px-4 rounded-full text-sm transition"
             >
               View Details
-            </a>
+            </Link>
           </div>
         ))}
       </div>
