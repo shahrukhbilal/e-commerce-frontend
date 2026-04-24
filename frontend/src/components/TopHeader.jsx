@@ -17,19 +17,18 @@ const TopHeader = () => {
   };
 
   return (
-<div className="fixed top-0 left-0 w-full z-50 bg-gray-900 text-gray-200 text-sm px-4 py-2 hidden sm:block shadow-md">
-
+<div className="fixed top-0 left-0 w-full z-50 bg-gray-900 text-gray-200 text-xs sm:text-sm px-3 sm:px-4 py-2 sm:py-3 shadow-md truncate">
 <div className="max-w-7xl mx-auto flex justify-between items-center">
 
   {/* Left - Contact */}
-  <div className="flex items-center gap-4 text-xs sm:text-sm">
-    <span>📞 +92-318-6198386</span>
+  <div className="flex items-center text-xs sm:text-xs">
+    <span className='sm:text-sm'>📞 +92-318-6198386</span>
     <span className="hidden md:inline">|</span>
     <span className="hidden md:inline">✉️ southsec021karachi@gmail.com</span>
   </div>
 
   {/* Right - Actions */}
-  <div className="flex items-center gap-5">
+  <div className="flex items-center gap-3 sm:gap-2">
 
     <Link to="/" className="hover:text-white transition">
       Home

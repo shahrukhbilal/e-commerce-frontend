@@ -1,16 +1,20 @@
 import React, { useState, useEffect } from 'react';
-import { Menu, X, ShoppingCart, User } from 'lucide-react';
+import { Menu, X } from 'lucide-react';
 import brandLogo from '../assets/Brand.png';
 import { Link } from 'react-router-dom';
 
 const MainNavbar = () => {
   const [isOpen, setIsOpen] = useState(false);
   const [categories, setCategories] = useState([]);
-
   const [search, setSearch] = useState('');
   const [searchResults, setSearchResults] = useState([]);
 
   const toggleMenu = () => setIsOpen(!isOpen);
+
+  // منع scroll when mobile menu open
+  useEffect(() => {
+    document.body.style.overflow = isOpen ? 'hidden' : 'auto';
+  }, [isOpen]);
 
   // Fetch categories
   useEffect(() => {
@@ -20,7 +24,6 @@ const MainNavbar = () => {
           `${import.meta.env.VITE_API_URL}/api/categories`
         );
         const data = await res.json();
-        console.log('caregories data', data)
         setCategories(data);
       } catch (error) {
         console.error('Error fetching categories:', error);
@@ -33,176 +36,162 @@ const MainNavbar = () => {
   // Search handler
   const handleSearch = async (e) => {
     e.preventDefault();
-
     if (!search.trim()) return;
 
     try {
       const res = await fetch(
         `${import.meta.env.VITE_API_URL}/api/products/search?q=${search}`
       );
-
       const data = await res.json();
       setSearchResults(data);
-      console.log(searchResults)
     } catch (error) {
       console.error('Search error:', error);
     }
   };
 
   return (
-    <nav className="bg-white/ backdrop-blur-md shadow-md sticky top-10 z-50">
+    <nav className="bg-white backdrop-blur-md shadow-md sticky top-10 z-50">
 
+      {/* MAIN BAR */}
       <div className="flex justify-between items-center max-w-7xl mx-auto px-4 py-3">
 
         {/* Logo */}
-        <Link to="/shop" className="flex items-center">
+        <Link to="/shop">
           <img
             src={brandLogo}
-            alt="Brand Logo"
-            className="h-12 w-auto object-contain"
+            alt="Brand"
+            className="h-10 w-auto"
           />
         </Link>
 
-        {/* ================= SEARCH ================= */}
+        {/* DESKTOP SEARCH */}
         <div className="hidden md:flex w-1/3 relative">
-
           <form onSubmit={handleSearch} className="flex w-full">
             <input
               type="text"
               value={search}
               onChange={(e) => setSearch(e.target.value)}
               placeholder="Search products..."
-              className="w-full px-4 py-2 border rounded-l-full focus:outline-none focus:ring-2 focus:ring-blue-400"
+              className="w-full px-4 py-2 border rounded-l-full focus:outline-none focus:ring-2 focus:ring-yellow-400"
             />
-
-            <button
-              type="submit"
-              className="bg-blue-600 text-white px-4 rounded-r-full hover:bg-blue-700 transition"
-            >
+            <button className="bg-yellow-500 text-white px-4 rounded-r-full">
               Search
             </button>
           </form>
 
           {/* SEARCH DROPDOWN */}
-          {search && searchResults.length > 0 && (
-  <div className="absolute top-full mt-2 left-0 w-full bg-white shadow-2xl rounded-xl z-50 max-h-96 overflow-y-auto border">
+          {search && (
+            <div className="absolute top-full mt-2 left-0 w-full bg-white shadow-xl rounded-lg z-50 max-h-80 overflow-y-auto">
 
-    {/* Header (Table style) */}
-    <div className="grid grid-cols-4 gap-2 px-4 py-2 bg-gray-100 text-sm font-semibold text-gray-600 sticky top-0">
-      <span>ID</span>
-      <span>Image</span>
-      <span>Title</span>
-      <span>Price</span>
-    </div>
+              {searchResults.length > 0 ? (
+                searchResults.map((item) => (
+                  <Link
+                    key={item._id}
+                    to={`/product/${item.slug}`}
+                    className="flex items-center gap-3 px-3 py-2 hover:bg-gray-100 border-b"
+                  >
+                    <img
+                      src={item.images[0]}
+                      className="w-10 h-10 rounded object-cover"
+                    />
+                    <div>
+                      <p className="text-sm">{item.title}</p>
+                      <p className="text-xs text-green-600">${item.price}</p>
+                    </div>
+                  </Link>
+                ))
+              ) : (
+                <p className="text-center p-3 text-gray-500">
+                  No products found 😕
+                </p>
+              )}
 
-    {searchResults.map((item) => (
-      <Link
-        key={item._id}
-        to={`/product/${item.slug}`}
-        className="grid grid-cols-4 gap-2 items-center px-4 py-3 hover:bg-gray-50 transition border-t"
-      >
-        {/* ID */}
-        <span className="text-xs text-gray-500 truncate">
-          {item._id.slice(-6)}
-        </span>
+            </div>
+          )}
+        </div>
 
-        {/* Image */}
-        <img
-          src={item.images[0]}
-          alt={item.title}
-          className="w-12 h-12 object-cover rounded-md"
-        />
+        {/* DESKTOP CATEGORIES */}
+        <ul className="hidden md:flex gap-6 text-gray-700">
+          {categories.map((cat) => (
+            <li key={cat._id}>
+              <Link
+                to={`/category/${cat.slug}`}
+                className="hover:text-yellow-600"
+              >
+                {cat.name}
+              </Link>
+            </li>
+          ))}
+        </ul>
 
-        {/* Title */}
-        <span className="text-sm font-medium text-gray-800 truncate">
-          {item.title}
-        </span>
+        {/* MOBILE MENU BUTTON */}
+        <button onClick={toggleMenu} className="md:hidden">
+          {isOpen ? <X size={28} /> : <Menu size={28} />}
+        </button>
+      </div>
 
-        {/* Price */}
-        <span className="text-sm font-semibold text-green-600">
-          ${item.price}
-        </span>
-      </Link>
-    ))}
+      {/* MOBILE MENU */}
+      {isOpen && (
+        <div className="px-4 pb-6 space-y-4 md:hidden">
 
-  </div>
-)}
+          {/* MOBILE SEARCH */}
+          <form onSubmit={handleSearch} className="flex w-full">
+            <input
+              type="text"
+              value={search}
+              onChange={(e) => setSearch(e.target.value)}
+              placeholder="Search..."
+              className="w-full border rounded-l-full px-4 py-2"
+            />
+            <button className="bg-yellow-500 text-white px-4 py-2 rounded-r-full">
+              Search
+            </button>
+          </form>
 
-          {/* NO RESULTS */}
-          {search && searchResults.length === 0 && (
-            <div className="absolute top-full mt-2 left-0 w-full bg-white shadow-md rounded-xl p-3 text-center text-gray-500">
-              No products found 😕
+          {/* MOBILE SEARCH RESULTS */}
+          {search && (
+            <div className="bg-white shadow rounded-lg max-h-60 overflow-y-auto">
+
+              {searchResults.length > 0 ? (
+                searchResults.map((item) => (
+                  <Link
+                    key={item._id}
+                    to={`/product/${item.slug}`}
+                    onClick={() => setIsOpen(false)}
+                    className="flex items-center gap-3 px-3 py-2 border-b"
+                  >
+                    <img
+                      src={item.images[0]}
+                      className="w-10 h-10 rounded"
+                    />
+                    <div>
+                      <p className="text-sm">{item.title}</p>
+                      <p className="text-xs text-green-600">${item.price}</p>
+                    </div>
+                  </Link>
+                ))
+              ) : (
+                <p className="text-center p-3 text-gray-500">
+                  No results 😕
+                </p>
+              )}
+
             </div>
           )}
 
-        </div>
-
-        {/* Desktop Categories */}
-        <ul className="hidden md:flex space-x-6 text-base font-medium text-gray-700">
-  {categories?.length > 0 && categories.map((cat) => (
-    <li key={cat._id}>
-      <Link
-  to={`/category/${cat.slug}`}
-  onClick={() => console.log(cat)}
-  className="hover:text-blue-600 transition"
->
-  {cat.name}
-</Link>
-    </li>
-  ))}
-</ul>
-
-        {/* Right Side */}
-        <div className="flex items-center gap-4">
-
-          {/* Cart */}
-          <div className="relative cursor-pointer">
-            <ShoppingCart size={22} />
-            <span className="absolute -top-2 -right-2 bg-red-500 text-white text-xs px-1 rounded-full">
-              2
-            </span>
-          </div>
-
-          {/* Profile */}
-          <div className="cursor-pointer hidden md:block">
-            <User size={22} />
-          </div>
-
-          {/* Mobile Menu */}
-          <button
-            onClick={toggleMenu}
-            className="md:hidden text-gray-700"
-          >
-            {isOpen ? <X size={28} /> : <Menu size={28} />}
-          </button>
-
-        </div>
-
-      </div>
-
-      {/* ================= MOBILE MENU ================= */}
-      {isOpen && (
-        <div className="md:hidden px-4 pb-4 space-y-3">
-
-          <input
-            type="text"
-            placeholder="Search..."
-            className="w-full px-4 py-2 border rounded-lg"
-          />
-
+          {/* MOBILE CATEGORIES */}
           {categories.map((cat) => (
-            <a
+            <Link
               key={cat._id}
-              href={`/category/${cat.slug}`}
-              className="block text-center text-gray-700 hover:text-blue-600"
+              to={`/category/${cat.slug}`}
+              onClick={() => setIsOpen(false)}
+              className="block text-center text-gray-700 py-2 border-b"
             >
               {cat.name}
-            </a>
+            </Link>
           ))}
-
         </div>
       )}
-
     </nav>
   );
 };

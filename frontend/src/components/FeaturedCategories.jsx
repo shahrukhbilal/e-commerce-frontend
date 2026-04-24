@@ -52,10 +52,7 @@ const FeaturedCategories = () => {
               className="bg-white p-4 rounded-lg shadow hover:shadow-lg transition"
             >
               {/* Category Link */}
-              <a
-                href={`/category/${category?.slug}`}
-                className="block text-center"
-              >
+    
                 {/* Category Image */}
                 <img
                   src={category?.image}
@@ -67,7 +64,7 @@ const FeaturedCategories = () => {
                 <h3 className="text-lg font-semibold text-gray-700">
                   {category?.name}
                 </h3>
-              </a>
+            
             </div>
           ))}
         </div>

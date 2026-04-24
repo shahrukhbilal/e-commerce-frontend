@@ -9,6 +9,7 @@ const sizes = ["S", "M", "L", "XL"];
 const ProductDetailPage = () => {
   // Get product slug from URL params
   const { slug } = useParams();
+  console.log('slug on detail page', slug)
 
   // State to store the fetched product data
   const [product, setProduct] = useState(null);
@@ -32,6 +33,7 @@ const ProductDetailPage = () => {
     async function fetchProduct() {
       try {
         const res = await fetch(`${import.meta.env.VITE_API_URL}/api/products/slug/${slug}`);
+        console.log('response from detail page', res)
 
         if (!res.ok) {
           throw new Error("Product not found"); // Error if product not found
