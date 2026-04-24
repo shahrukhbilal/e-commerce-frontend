@@ -93,7 +93,7 @@ const ContactPage = () => {
       {/* ------------------------
           Header Section
       ------------------------ */}
-      <section className="bg-yellow-400 text-black py-16 px-6 text-center">
+      <section className="bg-green-600 text-white py-16 px-6 text-center">
         <h1 className="text-5xl font-extrabold mb-3 drop-shadow-md">Contact Us</h1>
         <p className="max-w-2xl mx-auto text-lg font-medium">
           We'd love to hear from you — feel free to reach out with any questions or ideas!
@@ -121,13 +121,13 @@ const ContactPage = () => {
             </div>
             <div>
               <h4 className="font-bold text-sm">✉️ Email</h4>
-              <p>support@myshop.com</p>
+              <p>southsec021karachi@gmail.com</p>
             </div>
           </div>
         </div>
 
         {/* Contact Form */}
-        <div className="bg-white/60 backdrop-blur-md shadow-2xl rounded-2xl p-8 border border-yellow-200">
+        <div className="bg-white/60 backdrop-blur-md shadow-2xl rounded-2xl p-8 border border-white hover:scale-105 transition duration-400">
           <h2 className="text-2xl font-semibold mb-6">📬 Send Us a Message</h2>
 
           <form onSubmit={handleSubmit} className="space-y-5">
@@ -203,7 +203,7 @@ const ContactPage = () => {
             <button
               type="submit"
               disabled={loading}
-              className={`w-full bg-yellow-400 hover:bg-yellow-500 transition-colors text-black font-semibold py-3 rounded-lg flex items-center justify-center ${
+              className={`w-full bg-green-600 hover:bg-green-700 transition-colors text-white font-bold py-3 rounded-lg flex items-center justify-center ${
                 loading ? 'opacity-50 cursor-not-allowed' : ''
               }`}
             >

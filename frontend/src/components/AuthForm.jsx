@@ -151,7 +151,7 @@ const AuthForm = () => {
   };
 
   return (
-    <div className="min-h-screen flex items-center justify-center bg-gradient-to-tr from-gray-900 to-gray-700">
+    <div className="min-h-screen flex items-center justify-center bg-linear-to-tr from-green-600 to-green-600">
       <div className="bg-white rounded-2xl shadow-xl w-full max-w-md p-8">
         {/* Dynamic heading based on mode */}
         <h2 className="text-2xl font-bold text-center mb-6 text-gray-800">
@@ -235,7 +235,7 @@ const AuthForm = () => {
 
           <button
             type="submit"
-            className="w-full bg-blue-600 text-white py-2 rounded-md hover:bg-blue-700 transition"
+            className="w-full bg-green-600 text-white font-bold py-2 rounded-md hover:bg-green-700 transition"
           >
             {isLogin ? 'Login' : 'Register'}
           </button>
@@ -249,7 +249,7 @@ const AuthForm = () => {
               <button
                 type="button"
                 onClick={toggleForm}
-                className="text-blue-500 font-medium hover:underline"
+                className="text-black font-bold hover:underline"
               >
                 Register
               </button>
@@ -260,7 +260,7 @@ const AuthForm = () => {
               <button
                 type="button"
                 onClick={toggleForm}
-                className="text-blue-500 font-medium hover:underline"
+                className="text-black font-bold hover:underline"
               >
                 Login
               </button>
