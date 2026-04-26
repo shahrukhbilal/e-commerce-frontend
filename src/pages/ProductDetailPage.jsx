@@ -175,7 +175,7 @@ const ProductDetailPage = () => {
           <div className="space-y-3 mt-6">
             <button
               onClick={handleAddToCart}
-              className="bg-yellow-400 hover:bg-yellow-500 text-black font-bold py-3 px-6 rounded-lg w-full transition"
+              className="bg-green-600 hover:bg-blue-700 text-black font-bold py-3 px-6 rounded-lg w-full transition"
               disabled={!selectedSize}
             >
               🛒 Add to Cart
