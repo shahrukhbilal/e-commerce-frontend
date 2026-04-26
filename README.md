@@ -1,9 +1,12 @@
 # 🛒 E-Commerce Website  
 
-[![Live Demo](https://e-commerce-frontend-q5dp.vercel.app/)  
-[![Backend API](https://ecom-backend-1-so0q.onrender.com/)  
-[![Made with React](https://img.shields.io/badge/Made%20With-React-blue?style=for-the-badge&logo=react)](https://reactjs.org/)  
-[![Backend](https://img.shields.io/badge/Backend-Node.js-green?style=for-the-badge&logo=node.js)](https://nodejs.org/)  
+[![Live Demo](https://img.shields.io/badge/Live%20Demo-Frontend-blue?style=for-the-badge&logo=vercel)](https://e-commerce-frontend-q5dp.vercel.app/)
+
+[![Backend API](https://img.shields.io/badge/Backend-API-green?style=for-the-badge&logo=node.js)](https://ecom-backend-1-so0q.onrender.com/)
+
+[![Made with React](https://img.shields.io/badge/Made%20With-React-blue?style=for-the-badge&logo=react)](https://reactjs.org/)
+
+[![Backend](https://img.shields.io/badge/Backend-Node.js-green?style=for-the-badge&logo=node.js)](https://nodejs.org/)
 
 ---
 
