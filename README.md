@@ -1,6 +1,6 @@
 # 🛒 E-Commerce Website  
 
-[![Live Demo](https://img.shields.io/badge/Frontend-Live%20Demo-blue?style=for-the-badge&logo=vercel)](https://gitrepo-x6rx.vercel.app/)  
+[![Live Demo](https://e-commerce-frontend-q5dp.vercel.app/)  
 [![Backend API](https://img.shields.io/badge/Backend-API%20Live-green?style=for-the-badge&logo=railway)](https://ecom-backend-production-e2cb.up.railway.app/)  
 [![Made with React](https://img.shields.io/badge/Made%20With-React-blue?style=for-the-badge&logo=react)](https://reactjs.org/)  
 [![Backend](https://img.shields.io/badge/Backend-Node.js-green?style=for-the-badge&logo=node.js)](https://nodejs.org/)  
