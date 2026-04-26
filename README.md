@@ -1,7 +1,7 @@
 # 🛒 E-Commerce Website  
 
 [![Live Demo](https://e-commerce-frontend-q5dp.vercel.app/)  
-[![Backend API](https://img.shields.io/badge/Backend-API%20Live-green?style=for-the-badge&logo=railway)](https://ecom-backend-production-e2cb.up.railway.app/)  
+[![Backend API](https://ecom-backend-1-so0q.onrender.com/)  
 [![Made with React](https://img.shields.io/badge/Made%20With-React-blue?style=for-the-badge&logo=react)](https://reactjs.org/)  
 [![Backend](https://img.shields.io/badge/Backend-Node.js-green?style=for-the-badge&logo=node.js)](https://nodejs.org/)  
 
@@ -44,14 +44,14 @@ Includes **Stripe payments**, **Cloudinary image hosting**, **Nodemailer contact
 
 ## 🚀 Live Links  
 
-- **Frontend (Vercel):** [https://gitrepo-x6rx.vercel.app/](https://gitrepo-x6rx.vercel.app/)  
-- **Backend (Railway):** [Pendig](https://ecom-backend-production-e2cb.up.railway.app/)
+- **Frontend (Vercel):** [https://e-commerce-frontend-q5dp.vercel.app/)  
+- **Backend (Render):** [Pendig](https://ecom-backend-1-so0q.onrender.com/)
 
 
 ## 📸 Screenshots / Demo
 
 **Home Page:**  
-![Home Page](https://res.cloudinary.com/dvjkqt391/image/upload/v1770156250/E-commerce_homepage_tgsyol.png)
+![Home Page](https://res.cloudinary.com/dvjkqt391/image/upload/v1777202912/new_landing_page_nloaon.png)
 
 **Product Page (with Filters):**  
 ![Product Page](https://res.cloudinary.com/dvjkqt391/image/upload/v1770156397/Product_Page_lcuz3t.png)
