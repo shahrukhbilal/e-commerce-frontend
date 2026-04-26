@@ -47,8 +47,8 @@ Includes **Stripe payments**, **Cloudinary image hosting**, **Nodemailer contact
 
 ## 🚀 Live Links  
 
-- **Frontend (Vercel):** [https://e-commerce-frontend-q5dp.vercel.app/)  
-- **Backend (Render):** [Pendig](https://ecom-backend-1-so0q.onrender.com/)
+- **Frontend (Vercel):** https://e-commerce-frontend-q5dp.vercel.app/
+- **Backend (Render):** https://ecom-backend-1-so0q.onrender.com/
 
 
 ## 📸 Screenshots / Demo
