@@ -57,7 +57,7 @@ Includes **Stripe payments**, **Cloudinary image hosting**, **Nodemailer contact
 ![Home Page](https://res.cloudinary.com/dvjkqt391/image/upload/v1777202912/new_landing_page_nloaon.png)
 
 **Product Page (with Filters):**  
-![Product Page](https://res.cloudinary.com/dvjkqt391/image/upload/v1770156397/Product_Page_lcuz3t.png)
+![Product Page](https://res.cloudinary.com/dvjkqt391/image/upload/v1777204522/new_product_page_c6563o.png)
 
 **Add To Cart Page:**  
 ![Add to Cart  Page](https://res.cloudinary.com/dvjkqt391/image/upload/v1770156601/Add_to_cart_Page_grjdy4.png)
