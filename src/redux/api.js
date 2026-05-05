@@ -19,6 +19,7 @@ export const api = createApi({
         method: 'POST',
         body: credentials,
       }),
+      
     }),
     register: builder.mutation({
       query: (userInfo) => ({
@@ -29,5 +30,4 @@ export const api = createApi({
     }),
   }),
 });
-
 export const { useLoginMutation, useRegisterMutation } = api;
