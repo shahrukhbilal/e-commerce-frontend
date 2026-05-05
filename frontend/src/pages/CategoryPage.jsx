@@ -18,7 +18,7 @@ const CategoryPage = () => {
         const res = await fetch(
           `${import.meta.env.VITE_API_URL}/api/products/category/${slug}`
         );
-
+        console.log(`${import.meta.env.VITE_API_URL}/api/products/category/${slug}`);
         const data = await res.json();
         console.log('response from backend :', data)
 

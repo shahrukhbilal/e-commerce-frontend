@@ -42,7 +42,10 @@ const MainNavbar = () => {
       const res = await fetch(
         `${import.meta.env.VITE_API_URL}/api/products/search?q=${search}`
       );
+      console.log(`${import.meta.env.VITE_API_URL}/api/products/search?q=${search}`);
+
       const data = await res.json();
+      console.log('search result from navbar', data)
       setSearchResults(data);
     } catch (error) {
       console.error('Search error:', error);

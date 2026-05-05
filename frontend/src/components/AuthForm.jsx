@@ -9,7 +9,7 @@ import { useLoginMutation, useRegisterMutation } from '../redux/api';
 // Redux action to store user + token
 import { setCredentials } from '../redux/authSlice';
 
-const AuthForm = () => {
+const AuthForm = () => { 
   // Login vs Register toggle
   // true = Login form, false = Register form
   const [isLogin, setIsLogin] = useState(true);
@@ -82,7 +82,7 @@ const AuthForm = () => {
 
     return true;
   };
-
+  
   // Main submit handler for both Login & Register
   const handleSubmit = async (e) => {
     e.preventDefault();
