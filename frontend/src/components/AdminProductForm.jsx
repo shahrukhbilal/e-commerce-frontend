@@ -1,6 +1,6 @@
 // import react to write jsx in the component
 // import useState hook to store local data of component
-import React, { useState } from "react";
+import React, { useState , useEffect} from "react";
 
 // react functional componenet
 const AdminProductForm = () => {
@@ -16,9 +16,20 @@ const AdminProductForm = () => {
   });
 
   // extra states to store data
+  const[categories, setCategories] = useState([])
   const [selectedFiles, setSelectedFiles] = useState([]);
   const [previewUrls, setPreviewUrls] = useState([]);
   const [loading, setLoading] = useState(false);
+
+  useEffect(() => {
+    const fetchCategories = async () => {
+      const res = await fetch(`${import.meta.env.VITE_API_URL}/api/categories`);
+      const data = await res.json();
+      setCategories(data);
+    };
+  
+    fetchCategories();
+  }, []);
 
   // slug generator function
   const generateSlug = (text) => {
@@ -177,24 +188,26 @@ const AdminProductForm = () => {
 
       {/* Category */}
       <div>
-        <label className="block mb-1 font-medium text-gray-700">Category</label>
-        <select
-          name="category"
-          className="w-full border border-gray-300 px-4 py-2 rounded-md focus:outline-none focus:ring-2 focus:ring-blue-400"
-          value={formData.category}
-          onChange={handleChange}
-          required
-        >
-          <option value="">Select Category</option>
-          <option value="men">Men</option>
-          <option value="women">Women</option>
-          <option value="women">kids</option>
-          <option value="electronics">Electronics</option>
-          <option value="shoes">Shoes</option>
-          <option value="accessories">Accessories</option>
-        </select>
-      </div>
+  <label className="block mb-1 font-medium text-gray-700">
+    Category
+  </label>
 
+  <select
+    name="category"
+    className="w-full border border-gray-300 px-4 py-2 rounded-md focus:outline-none focus:ring-2 focus:ring-blue-400"
+    value={formData.category}
+    onChange={handleChange}
+    required
+  >
+    <option value="">Select Category</option>
+
+    {categories.map((cat) => (
+      <option key={cat._id} value={cat._id}>
+        {cat.name}
+      </option>
+    ))}
+  </select>
+</div>
       {/* Price & Stock */}
       <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
         <div>
