@@ -162,7 +162,7 @@ const ProductSection = () => {
 
             {/* View Details Button */}
             <Link
-              href={`/product/${product.slug}`}
+            to={`/product/${product.slug}`}
               className="inline-block bg-green-600 hover:bg-green-700 hover:scale-110 text-white font-semibold py-2 px-4 rounded-full text-sm transition"
             >
               View Details

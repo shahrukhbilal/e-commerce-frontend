@@ -42,7 +42,7 @@ function App() {
   
         <Route element={<SimpleLayout />}>
           <Route path="/product/:slug" element={<ProductDetailPage />} />
-          <Route path="/category/:slug" element={<CategoryPage />} />          <Route path="/category/:slug" element={<CategoryPage />} />
+          <Route path="/category/:slug" element={<CategoryPage />} /> 
 
           <Route path="/cart" element={<CartPage />} />
           <Route path="/checkout" element={<StripeContainer />} />
