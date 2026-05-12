@@ -1,9 +1,12 @@
 # 🛒 E-Commerce Website  
 
-[![Live Demo](https://img.shields.io/badge/Frontend-Live%20Demo-blue?style=for-the-badge&logo=vercel)](https://gitrepo-x6rx.vercel.app/)  
-[![Backend API](https://img.shields.io/badge/Backend-API%20Live-green?style=for-the-badge&logo=railway)](https://ecom-backend-production-e2cb.up.railway.app/)  
-[![Made with React](https://img.shields.io/badge/Made%20With-React-blue?style=for-the-badge&logo=react)](https://reactjs.org/)  
-[![Backend](https://img.shields.io/badge/Backend-Node.js-green?style=for-the-badge&logo=node.js)](https://nodejs.org/)  
+[![Live Demo](https://img.shields.io/badge/Live%20Demo-Frontend-blue?style=for-the-badge&logo=vercel)](https://e-commerce-frontend-q5dp.vercel.app/)
+
+[![Backend API](https://img.shields.io/badge/Backend-API-green?style=for-the-badge&logo=node.js)](https://ecom-backend-1-so0q.onrender.com/)
+
+[![Made with React](https://img.shields.io/badge/Made%20With-React-blue?style=for-the-badge&logo=react)](https://reactjs.org/)
+
+[![Backend](https://img.shields.io/badge/Backend-Node.js-green?style=for-the-badge&logo=node.js)](https://nodejs.org/)
 
 ---
 
@@ -44,9 +47,47 @@ Includes **Stripe payments**, **Cloudinary image hosting**, **Nodemailer contact
 
 ## 🚀 Live Links  
 
-- **Frontend (Vercel):** [https://gitrepo-x6rx.vercel.app/](https://gitrepo-x6rx.vercel.app/)  
-- **Backend (Railway):** [https://ecom-backend-production-e2cb.up.railway.app/](https://ecom-backend-production-e2cb.up.railway.app/)  
+- **Frontend (Vercel):** https://e-commerce-frontend-q5dp.vercel.app/
+- **Backend (Render):** https://ecom-backend-1-so0q.onrender.com/
 
+
+## 📸 Screenshots / Demo
+
+**Home Page:**  
+![Home Page](https://res.cloudinary.com/dvjkqt391/image/upload/v1777202912/new_landing_page_nloaon.png)
+
+**Product Page (with Filters):**  
+![Product Page](https://res.cloudinary.com/dvjkqt391/image/upload/v1777204522/new_product_page_c6563o.png)
+
+**Add To Cart Page:**  
+![Add to Cart  Page](https://res.cloudinary.com/dvjkqt391/image/upload/v1770156601/Add_to_cart_Page_grjdy4.png)
+
+**Check Out Page:**  
+![Check Out Page](https://res.cloudinary.com/dvjkqt391/image/upload/v1770156772/Check_Out_Page_xc5vzg.png)
+
+**Complimemnts Page:**  
+![Compliments Page](https://res.cloudinary.com/dvjkqt391/image/upload/v1770157060/Compliments_Page_s3l7ew.png)
+
+**Contact Page:**  
+![Contact Page](https://res.cloudinary.com/dvjkqt391/image/upload/v1770157178/Contact_Us_page_ycdbdv.png)
+
+**Admin Panel Orders Page:**  
+![Admin Panel Orders Page](https://res.cloudinary.com/dvjkqt391/image/upload/v1770157395/Admin_Pannel_baagb9.png)
+
+**Admin Product Upload Page:**  
+![Admin Product Upload Page](https://res.cloudinary.com/dvjkqt391/image/upload/v1770157560/Product_Upload_Form_fzblcn.png)
+
+# Clone the repo
+git clone https://github.com/shahrukhbilal/leave-menagement-vs2
+
+# Navigate into project folder
+cd E-commerce 
+
+# Install dependencies
+npm install
+
+# Start development server
+npm run
 
 ## 📩 Contact  
 
