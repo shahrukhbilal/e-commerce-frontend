@@ -46,7 +46,7 @@ const ProductSection = () => {
       setProducts(data);
 
       // Helpful for debugging during development
-      console.log("Fetched products:", data);
+  
     } catch (error) {
       console.error("Error fetching products:", error.message);
     }
