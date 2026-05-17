@@ -21,7 +21,6 @@ const ProductSection = () => {
   });
 
   const BASE_URL = import.meta.env.VITE_API_URL;
-  console.log('this is the url',BASE_URL)
 
   /**
    * Fetch products from backend based on current filters
