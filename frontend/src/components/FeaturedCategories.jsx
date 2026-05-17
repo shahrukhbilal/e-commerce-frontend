@@ -1,4 +1,5 @@
 import React, { useEffect, useState } from 'react';
+import { CategoryCardSkeleton } from './SkeletonCard';
 
 /**
  * FeaturedCategories Component
@@ -10,12 +11,14 @@ import React, { useEffect, useState } from 'react';
 const FeaturedCategories = () => {
   // State to store featured categories fetched from backend
   const [categories, setCategories] = useState([]);
+  const [loading, setLoading] = useState(true);
 
   /**
    * Fetch featured categories on component mount
    */
   useEffect(() => {
     const fetchCategories = async () => {
+      setLoading(true);
       try {
         // API call to get featured categories
         const response = await fetch(
@@ -30,6 +33,8 @@ const FeaturedCategories = () => {
       } catch (error) {
         // Log error if API call fails
         console.error('Error loading featured categories:', error);
+      } finally {
+        setLoading(false);
       }
     };
 
@@ -46,7 +51,11 @@ const FeaturedCategories = () => {
 
         {/* Categories Grid */}
         <div className="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-5 gap-6">
-          {categories.map((category) => (
+          {loading
+            ? Array.from({ length: 5 }).map((_, i) => (
+                <CategoryCardSkeleton key={i} />
+              ))
+            : categories.map((category) => (
             <div
               key={category?._id}
               className="bg-white p-4 rounded-lg shadow hover:shadow-lg transition"

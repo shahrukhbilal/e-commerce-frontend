@@ -1,5 +1,6 @@
 import React, { useEffect, useState } from "react";
 import { Link } from "react-router-dom";
+import { ProductCardSkeleton } from "./SkeletonCard";
 
 /**
  * ProductSection Component
@@ -11,6 +12,7 @@ import { Link } from "react-router-dom";
 const ProductSection = () => {
   // Stores fetched products
   const [products, setProducts] = useState([]);
+  const [loading, setLoading] = useState(true);
 
   // Stores current filter / sort values
   const [filters, setFilters] = useState({
@@ -28,6 +30,7 @@ const ProductSection = () => {
    * - Handles errors gracefully
    */
   const fetchProducts = async () => {
+    setLoading(true);
     try {
       const params = new URLSearchParams();
 
@@ -49,6 +52,8 @@ const ProductSection = () => {
   
     } catch (error) {
       console.error("Error fetching products:", error.message);
+    } finally {
+      setLoading(false);
     }
   };
 
@@ -135,7 +140,11 @@ const ProductSection = () => {
 
       {/* ================= Product Grid ================= */}
       <div className="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-4 gap-6">
-        {products.map((product) => (
+        {loading
+          ? Array.from({ length: 8 }).map((_, i) => (
+              <ProductCardSkeleton key={i} />
+            ))
+          : products.map((product) => (
           <div
             key={product._id}
             className="bg-white p-4 rounded-lg shadow hover:shadow-md transition"

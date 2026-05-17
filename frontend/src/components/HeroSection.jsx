@@ -1,5 +1,6 @@
 import React, { useState, useEffect } from 'react';
 import { Link } from 'react-router-dom';
+import { HeroSkeleton } from './SkeletonCard';
 
 const HeroSection = () => {
   const [slides, setSlides] = useState([]);
@@ -7,23 +8,31 @@ const HeroSection = () => {
   const [products, setProducts] = useState([]);
   const [current, setCurrent] = useState(0);
   const [activeCat, setActiveCat] = useState('');
-  const [loadingProducts, setLoadingProducts] = useState(false);
+  const [loadingSlides, setLoadingSlides] = useState(true);
+  const [loadingCategories, setLoadingCategories] = useState(true);
+  const [loadingProducts, setLoadingProducts] = useState(true);
 
   // Fetch slides
   useEffect(() => {
+    setLoadingSlides(true);
     fetch(`${import.meta.env.VITE_API_URL}/api/heroslides`)
       .then(res => res.json())
-      .then(setSlides);
+      .then(setSlides)
+      .catch((err) => console.error('Error loading slides:', err))
+      .finally(() => setLoadingSlides(false));
   }, []);
 
   // Fetch categories
   useEffect(() => {
+    setLoadingCategories(true);
     fetch(`${import.meta.env.VITE_API_URL}/api/categories`)
       .then(res => res.json())
       .then(data => {
         setCategories(data);
         if (data.length > 0) setActiveCat(data[0].slug);
-      });
+      })
+      .catch((err) => console.error('Error loading categories:', err))
+      .finally(() => setLoadingCategories(false));
   }, []);
 
   // Fetch products
@@ -36,9 +45,9 @@ const HeroSection = () => {
       .then(res => res.json())
       .then(data => {
         setProducts(data.slice(0, 4));
-        console.log(setProducts)
-        setLoadingProducts(false);
-      });
+      })
+      .catch((err) => console.error('Error loading hero products:', err))
+      .finally(() => setLoadingProducts(false));
   }, [activeCat]);
 
   // Auto slider
@@ -49,6 +58,8 @@ const HeroSection = () => {
     }, 4000);
     return () => clearInterval(timer);
   }, [slides]);
+
+  if (loadingSlides) return <HeroSkeleton />;
 
   if (!slides.length) return null;
 
@@ -100,19 +111,26 @@ const HeroSection = () => {
 
       {/* CATEGORY TABS */}
       <div className="flex flex-wrap gap-3 mt-10 justify-center">
-        {categories.map(cat => (
-          <button
-            key={cat._id}
-            onClick={() => setActiveCat(cat._id)}
-            className={`px-4 py-2 rounded-full text-sm border hover:scale-110 bg-white font-bold transition ${
-              activeCat === cat.slug
-                ? 'bg-green-600 text-black shadow-md scale-105'
-                : 'bg-white hover:bg-gray-100'
-            }`}
-          >
-            {cat.name}
-          </button>
-        ))}
+        {loadingCategories
+          ? Array.from({ length: 5 }).map((_, i) => (
+              <div
+                key={i}
+                className="animate-pulse h-10 w-24 bg-white/40 rounded-full"
+              />
+            ))
+          : categories.map(cat => (
+              <button
+                key={cat._id}
+                onClick={() => setActiveCat(cat.slug)}
+                className={`px-4 py-2 rounded-full text-sm border hover:scale-110 bg-white font-bold transition ${
+                  activeCat === cat.slug
+                    ? 'bg-green-600 text-black shadow-md scale-105'
+                    : 'bg-white hover:bg-gray-100'
+                }`}
+              >
+                {cat.name}
+              </button>
+            ))}
       </div>
 
       {/* PRODUCTS */}
