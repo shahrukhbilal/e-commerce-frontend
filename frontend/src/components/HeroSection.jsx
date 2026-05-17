@@ -106,7 +106,7 @@ const HeroSection = () => {
             onClick={() => setActiveCat(cat._id)}
             className={`px-4 py-2 rounded-full text-sm border hover:scale-110 bg-white font-bold transition ${
               activeCat === cat.slug
-                ? 'bg-yellow-400 text-black shadow-md scale-105'
+                ? 'bg-green-600 text-black shadow-md scale-105'
                 : 'bg-white hover:bg-gray-100'
             }`}
           >
