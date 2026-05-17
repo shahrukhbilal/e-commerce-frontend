@@ -59,16 +59,19 @@ const ProductDetailPage = () => {
   // ------------------------
   const handleAddToCart = () => {
     const token = localStorage.getItem('token');
-
+  
     // Require user to be logged in
     if (!token) {
       alert('Please login');
       return;
     }
-
+  
     // Require user to select a size
-    if (!selectedSize) return;
-
+    if (!selectedSize) {
+      alert('please select size');
+      return;
+    }
+  
     // Dispatch Redux action to add product to cart
     dispatch(addToCart({ ...product, quantity, selectedSize }));
   };
@@ -214,8 +217,7 @@ const ProductDetailPage = () => {
           <div className="space-y-3 mt-6">
             <button
               onClick={handleAddToCart}
-              className="bg-yellow-400 hover:bg-yellow-500 text-black font-bold py-3 px-6 rounded-lg w-full transition"
-              disabled={!selectedSize} // Disable until size selected
+              className="bg-yellow-400 hover:bg-yellow-500 text-black font-bold py-3 px-6 rounded-lg w-full transition" // Disable until size selected
             >
               🛒 Add to Cart
             </button>
