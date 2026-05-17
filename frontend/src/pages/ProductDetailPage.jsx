@@ -23,6 +23,8 @@ const ProductDetailPage = () => {
   // State to store selected product size
   const [selectedSize, setSelectedSize] = useState(null);
 
+  const [loading, setLoading] = useState(true);
+
   // Redux dispatch to add product to cart
   const dispatch = useDispatch();
 
@@ -31,6 +33,9 @@ const ProductDetailPage = () => {
   // ------------------------
   useEffect(() => {
     async function fetchProduct() {
+      setLoading(true);
+      setProduct(null);
+
       try {
         const res = await fetch(`${import.meta.env.VITE_API_URL}/api/products/slug/${slug}`);
 
@@ -48,6 +53,8 @@ const ProductDetailPage = () => {
       } catch (err) {
         console.error("❌ Error fetching product:", err);
         setProduct(null); // Set null if error
+      } finally {
+        setLoading(false);
       }
     }
 
@@ -76,8 +83,17 @@ const ProductDetailPage = () => {
     dispatch(addToCart({ ...product, quantity, selectedSize }));
   };
 
-  // Show message if product not found
-  if (!product) return <p className="text-center py-20 text-xl">Product not found</p>;
+  if (loading) {
+    return (
+      <p className="text-center py-20 text-xl text-black">
+    Redirecting to detailpage...
+      </p>
+    );
+  }
+
+  if (!product) {
+    return <p className="text-center py-20 text-xl">Product not found</p>;
+  }
 
   // Convert price fields to numbers
   const price = Number(product?.price);
