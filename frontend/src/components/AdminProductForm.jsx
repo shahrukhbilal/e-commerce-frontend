@@ -25,7 +25,9 @@ const AdminProductForm = () => {
     const fetchCategories = async () => {
       const res = await fetch(`${import.meta.env.VITE_API_URL}/api/categories`);
       const data = await res.json();
+      console.log(data)
       setCategories(data);
+
     };
   
     fetchCategories();
@@ -40,7 +42,6 @@ const AdminProductForm = () => {
       .replace(/\s+/g, "-")
       .replace(/--+/g, "-");
   };
-  
   const handleGenerateDescription = async () => {
     try {
       const response = await fetch(
