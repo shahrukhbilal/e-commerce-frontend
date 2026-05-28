@@ -10,7 +10,6 @@ const ProductDetailPage = () => {
   // Get product slug from URL params
   const { slug } = useParams();
 
-
   // State to store the fetched product data
   const [product, setProduct] = useState(null);
 
@@ -22,6 +21,8 @@ const ProductDetailPage = () => {
 
   // State to store selected product size
   const [selectedSize, setSelectedSize] = useState(null);
+
+  const [wishlist, setWishlist] = useState([]);
 
   const [loading, setLoading] = useState(true);
 
@@ -37,7 +38,9 @@ const ProductDetailPage = () => {
       setProduct(null);
 
       try {
-        const res = await fetch(`${import.meta.env.VITE_API_URL}/api/products/slug/${slug}`);
+        const res = await fetch(
+          `${import.meta.env.VITE_API_URL}/api/products/slug/${slug}`,
+        );
 
         if (!res.ok) {
           throw new Error("Product not found"); // Error if product not found
@@ -45,7 +48,6 @@ const ProductDetailPage = () => {
 
         const data = await res.json();
         setProduct(data); // Save product to state
-
         // If product has images, set first image as main
         if (data.images && data.images.length > 0) {
           setMainImage(`${import.meta.env.VITE_API_URL}${data.images[0]}`);
@@ -65,28 +67,54 @@ const ProductDetailPage = () => {
   // Add selected product to cart
   // ------------------------
   const handleAddToCart = () => {
-    const token = localStorage.getItem('token');
-  
+    const token = localStorage.getItem("token");
+
     // Require user to be logged in
     if (!token) {
-      alert('Please login');
+      alert("Please login");
       return;
     }
-  
+
     // Require user to select a size
     if (!selectedSize) {
-      alert('please select size');
+      alert("please select size");
       return;
     }
-  
+
     // Dispatch Redux action to add product to cart
-    dispatch(addToCart({ ...product, quantity, selectedSize }));
+    dispatch(
+      addToCart({
+        ...product,
+        quantity,
+        selectedSize,
+      }),
+    );
   };
+
+  const handleWishList = ()=> {
+    console.log('wishList Button Clicked')
+ const exits = wishlist.some(item=> item._id == product._id)
+
+ if (exits){
+  setWishlist(
+    wishlist.filter(item=> item._id !== product._id)
+  )
+  console.log('product removed')
+ } else {
+  setWishlist([
+    ...wishlist, product
+  ])
+  console.log('product added')
+
+ }
+
+  }
+
 
   if (loading) {
     return (
       <p className="text-center py-20 text-xl text-black">
-    Redirecting to detailpage...
+        Redirecting to detailpage...
       </p>
     );
   }
@@ -102,7 +130,6 @@ const ProductDetailPage = () => {
   return (
     <section className="py-16 px-4 sm:px-8 lg:px-16 max-w-6xl mx-auto">
       <div className="grid grid-cols-1 md:grid-cols-2 gap-12 bg-white/70 backdrop-blur-lg rounded-2xl shadow-2xl p-6 border border-gray-200">
-
         {/* ------------------------
             Product Images Section
         ------------------------ */}
@@ -110,8 +137,8 @@ const ProductDetailPage = () => {
           <div className="relative overflow-hidden rounded-xl shadow-md group">
             <img
               src={
-                product?.images?.[0]?.startsWith('http')
-                  ? product.images[0]  // Full URL
+                product?.images?.[0]?.startsWith("http")
+                  ? product.images[0] // Full URL
                   : `https://ecom-backend-production-e2cb.up.railway.app${product.images[0]}` // Prepend backend URL
               }
               alt={product.title}
@@ -194,7 +221,9 @@ const ProductDetailPage = () => {
               </div>
               {/* Validation message for size */}
               {!selectedSize && (
-                <p className="text-sm text-red-500 mt-1">Please select a size</p>
+                <p className="text-sm text-red-500 mt-1">
+                  Please select a size
+                </p>
               )}
             </div>
 
@@ -238,14 +267,21 @@ const ProductDetailPage = () => {
               🛒 Add to Cart
             </button>
 
-            <button className="w-full border border-gray-300 text-gray-700 py-3 rounded-lg hover:bg-gray-100 transition">
+            <button 
+            onClick={handleWishList}
+            className="w-full border border-gray-300 text-gray-700 py-3 rounded-lg hover:bg-gray-100 transition">
               ❤️ Add to Wishlist
             </button>
 
             {/* SKU & Category Info */}
             <div className="text-sm text-gray-600 pt-2 space-y-1">
-              <p><strong>SKU:</strong> {product.sku || "N/A"}</p>
-              <p><strong>Category:</strong> {product.category?.name || product.category || "N/A"}</p>
+              <p>
+                <strong>SKU:</strong> {product.sku || "N/A"}
+              </p>
+              <p>
+                <strong>Category:</strong>{" "}
+                {product.category?.name || product.category || "N/A"}
+              </p>
             </div>
           </div>
         </div>

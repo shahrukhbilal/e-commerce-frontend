@@ -40,7 +40,33 @@ const AdminProductForm = () => {
       .replace(/\s+/g, "-")
       .replace(/--+/g, "-");
   };
-
+  const handleGenerateDescription = async () => {
+    try {
+      const response = await fetch(
+        "http://localhost:5000/api/ai/generate-description",
+        {
+          method: "POST",
+          headers: {
+            "Content-Type": "application/json",
+          },
+          body: JSON.stringify({
+            title: formData.title,
+            category: formData.category,
+          }),
+        }
+      );
+  
+      const data = await response.json();
+      console.log(data)
+  
+      setFormData({
+        ...formData,
+        description: data.description,
+      });
+    } catch (error) {
+      console.log(error);
+    }
+  };  
   // onchange event fires function handleChange
   // e = event object
   const handleChange = (e) => {
@@ -236,6 +262,19 @@ const AdminProductForm = () => {
           />
         </div>
       </div>
+      <div className="flex items-center justify-between mb-2">
+  <label className="font-semibold">
+    Product Description
+  </label>
+
+  <button
+    type="button"
+    onClick={handleGenerateDescription}
+    className="px-4 py-2 bg-black text-white rounded"
+  >
+    Generate AI Description
+  </button>
+</div>
 
       {/* Description */}
       <div>
