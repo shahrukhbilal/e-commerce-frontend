@@ -51,7 +51,7 @@ const MainNavbar = () => {
       console.error('Search error:', error);
     }
   };
-
+  
   return (
     <nav className="bg-white backdrop-blur-md shadow-md sticky top-10 z-50">
 
@@ -67,6 +67,7 @@ const MainNavbar = () => {
           />
         </Link>
 
+       
         {/* DESKTOP SEARCH */}
         <div className="hidden md:flex w-1/3 relative">
           <form onSubmit={handleSearch} className="flex w-full">

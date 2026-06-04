@@ -1,6 +1,7 @@
 import React from 'react';
 import FeaturedCategories from '../components/FeaturedCategories';
 import ProductSection from '../components/ProductSection';
+import AIShoppingAssistant from '../components/AIShoppingAssistant';
 
 const Home = () => {
   return (
@@ -16,6 +17,7 @@ const Home = () => {
 
 
       <ProductSection />
+      <AIShoppingAssistant />
     </div>
   );
 };

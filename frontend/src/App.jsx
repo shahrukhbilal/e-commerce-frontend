@@ -29,6 +29,7 @@ import StripeContainer from './StripeContainer';
 import AdminProductForm from './components/AdminProductForm';
 import FeaturedCategories from './components/FeaturedCategories';
 import CategoryPage from './pages/CategoryPage';
+import AIShoppingAssistant from './components/AIShoppingAssistant';
 
 
 function App() {
@@ -53,6 +54,7 @@ function App() {
           <Route path="/about" element={<AboutPage />} />
           <Route path="/contact" element={<ContactPage />} />
           <Route path="/feedback" element={<FeedbackPage />} />
+          <Route path="/ai-shopping-assistant" element={<AIShoppingAssistant />} />
         </Route>
   
         {/* 🛠️ Admin Panel Routes */}
