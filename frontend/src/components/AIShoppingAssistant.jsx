@@ -1,18 +1,25 @@
 import React, { useState } from "react";
 import { FiX } from "react-icons/fi";
 import { BsStars } from "react-icons/bs";
+import { Link } from 'react-router-dom';
 
 const AIShoppingAssistant = () => {
   const [isOpen, setIsOpen] = useState(false);
   const [message, setMessage] = useState("");
+  const [products, setProducts] = useState([]);
 
-  const handleSearch = () => {
+  const handleSearch = async () => {
     if (!message.trim()) return;
 
     console.log("User Query:", message);
 
     // Future API Call Here
-
+    const response = await fetch(
+      `${import.meta.env.VITE_API_URL}/api/ai/products/search?q=${message}`,
+    );
+    const data = await response.json();
+    console.log("Search Results:", data);
+    setProducts(data.products);
     setMessage("");
   };
 
@@ -60,9 +67,7 @@ const AIShoppingAssistant = () => {
             <div className="flex items-center gap-2">
               <BsStars size={20} className="text-yellow-500" />
 
-              <h3 className="font-semibold">
-                AI Shopping Assistant
-              </h3>
+              <h3 className="font-semibold">AI Shopping Assistant</h3>
             </div>
 
             <button
@@ -75,9 +80,41 @@ const AIShoppingAssistant = () => {
 
           {/* Chat Area */}
           <div className="flex-1 p-4 overflow-y-auto">
-            <div className="bg-gray-100 rounded-xl p-3 text-sm text-gray-700 w-fit max-w-[90%]">
-              👋 Hi! Tell me what product you're looking for.
-            </div>
+            <div className="space-y-4">
+              <div className="bg-gray-100 rounded-xl p-3 text-sm text-gray-700 w-fit max-w-[90%]">
+                👋 Hi! Tell me what product you're looking for.
+              </div>
+
+              {products.length > 0 && (
+                <div>
+                  <p className="font-semibold mb-3">
+                    I found these products for you 👇
+                  </p>
+
+                  {products.map((product) => (
+                    <div
+                      key={product._id}
+                      className="border rounded-xl p-3 mb-3 shadow-sm"
+                    >
+                      <img
+                        src={product.images[0]}
+                        className="w-full h-32 object-cover rounded-lg"
+                      />
+
+                      <h4 className="font-semibold mt-2">{product.title}</h4>
+
+                      <p className="text-green-600 font-bold">
+                        Rs {product.price}
+                      </p>
+
+                      <Link to={`/product/${product.slug}`} className="mt-2 bg-green-600 text-white px-3 py-1 rounded-lg">
+                        View Product
+                      </Link>
+                    </div>
+                  ))}
+                </div>
+              )}
+            </div>{" "}
           </div>
 
           {/* Input Area */}
@@ -86,9 +123,7 @@ const AIShoppingAssistant = () => {
               type="text"
               value={message}
               onChange={(e) => setMessage(e.target.value)}
-              onKeyDown={(e) =>
-                e.key === "Enter" && handleSearch()
-              }
+              onKeyDown={(e) => e.key === "Enter" && handleSearch()}
               placeholder="e.g. Sugess me black shoes under 5000"
               className="w-full border rounded-lg px-4 py-2 outline-none focus:ring-2 focus:ring-green-500"
             />
